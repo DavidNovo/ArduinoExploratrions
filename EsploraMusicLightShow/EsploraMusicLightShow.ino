@@ -52,8 +52,9 @@ void loop() {
   // down play a note and flash some color
   // depending on the note
     if (Esplora.readButton(SWITCH_UP) == LOW) {
+      // reading sensors for input
     int slider = Esplora.readSlider();
-    
+    int mic = Esplora.readMicrophone();
     
     // use map() to map the slider's range to the 
     // range of notes you have:
@@ -63,9 +64,9 @@ void loop() {
    
    // reading the slider for a note, in this care blue 
     byte blue = slider/4;
+    byte red   = constrain(mic, 0, 255);
     
-    
-    Esplora.writeRGB(0,10,blue);
+    Esplora.writeRGB(red,10,blue);
   }
   else {
     // if the button isn't pressed, turn the note off:
