@@ -60,8 +60,10 @@ void loop() {
     byte thisNote = map(slider, 0, 1023, 0, 13);
     // play the note corresponding to the slider's position:
     Esplora.tone(note[thisNote]);   
+   
    // reading the slider for a note, in this care blue 
     byte blue = slider/4;
+    
     
     Esplora.writeRGB(0,10,blue);
   }
