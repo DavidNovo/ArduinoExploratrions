@@ -63,7 +63,7 @@ void loop() {
    // reading the slider for a note, in this care blue 
     byte blue = slider/4;
     
-    Esplora.writeRGB(0,0,blue);
+    Esplora.writeRGB(0,10,blue);
   }
   else {
     // if the button isn't pressed, turn the note off:
