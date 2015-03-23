@@ -68,33 +68,49 @@ void parseCommand() {
 }
 
 void dumpInputs() {  
+  Serial.print("{");
+  Serial.print("SwitchOne:");
   Serial.print(Esplora.readButton(SWITCH_1)); 
   Serial.print(',');
+  Serial.print("SwitchTwo:");
   Serial.print(Esplora.readButton(SWITCH_2)); 
   Serial.print(',');
+  Serial.print("SwitchThree:");
   Serial.print(Esplora.readButton(SWITCH_3)); 
   Serial.print(',');
+  Serial.print("SwitchFour:");
   Serial.print(Esplora.readButton(SWITCH_4)); 
   Serial.print(',');
+  Serial.print("Slider:");
   Serial.print(Esplora.readSlider());         
   Serial.print(',');
+  Serial.print("LightSensor:");
   Serial.print(Esplora.readLightSensor());    
   Serial.print(',');
+  Serial.print("DegreesC:");
   Serial.print(Esplora.readTemperature(DEGREES_C)); 
   Serial.print(',');
+  Serial.print("SoundIntensity:");
   Serial.print(Esplora.readMicrophone());     
   Serial.print(',');
+  Serial.print("JoystickSwitch:");
   Serial.print(Esplora.readJoystickSwitch()); 
   Serial.print(',');
+  Serial.print("JoystickPosX:");
   Serial.print(Esplora.readJoystickX());      
   Serial.print(',');
+  Serial.print("JoystickPosY:");
   Serial.print(Esplora.readJoystickY());      
   Serial.print(',');
+  Serial.print("AccelerometerPosX:");
   Serial.print(Esplora.readAccelerometer(X_AXIS)); 
   Serial.print(',');
+  Serial.print("AccelerometerPosY:");
   Serial.print(Esplora.readAccelerometer(Y_AXIS)); 
   Serial.print(',');
+  Serial.print("AccelerometerPosZ:");
   Serial.print(Esplora.readAccelerometer(Z_AXIS)); 
+  Serial.print("}");
   Serial.println();
 }
 
