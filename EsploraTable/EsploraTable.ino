@@ -63,9 +63,13 @@ void loop() {
   
   if (isLoggingActive) {
     Esplora.writeGreen(100);
+        Esplora.writeBlue(0);
   } else {
     Esplora.writeBlue(100);
+    Esplora.writeGreen(0);
   }  
+  
+  checkSwitchPress();
 }
 
 void checkSwitchPress() {
