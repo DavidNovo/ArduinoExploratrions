@@ -1,3 +1,4 @@
+
 #include <Esplora.h>
 
 /*
@@ -58,13 +59,18 @@ void setup() {
 
 
 void loop() {
+  checkSwitchPress();
   
-  
+  if (isLoggingActive) {
+    Esplora.writeGreen(100);
+  } else {
+    Esplora.writeBlue(100);
+  }  
 }
 
-void checkSwithcPress() {
+void checkSwitchPress() {
   // read switch 1
-  boolean startBtn = Esplora.freadButton(SWITCH_DOWN);
+  boolean startBtn = Esplora.readButton(SWITCH_DOWN);
   
   // if switch is down set the LED to blue, set logging to active
   // but how do I know if it has been pressed? create a starting
@@ -73,7 +79,8 @@ void checkSwithcPress() {
   // if state of start button has changed
   if (startBtn != lastStartBtnState) {
   // then if the start button is high it has just been relased
-    // change the state of logging    
+    // change the state of logging   
+   isLoggingActive = !isLoggingActive; 
   }
   // else assign new state of button to the last polled state of the button 
   lastStartBtnState = startBtn;
