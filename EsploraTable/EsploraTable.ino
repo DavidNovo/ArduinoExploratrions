@@ -62,11 +62,9 @@ void loop() {
   checkSwitchPress();
   
   if (isLoggingActive) {
-    Esplora.writeGreen(100);
-    Esplora.writeBlue(0);
+    setLEDLoggingActive();
   } else {
-    Esplora.writeBlue(100);
-    Esplora.writeGreen(0);
+    setLEDLoggingInactive();
   }  
   
 }
@@ -95,8 +93,18 @@ void checkSwitchPress() {
     // else assign new state of button to the last polled state of the button 
    lastStartBtnState = startBtn;
   } 
-  
 }
+
+void setLEDLoggingActive() {
+  Esplora.writeGreen(100);
+  Esplora.writeBlue(0);
+}
+  
+void setLEDLoggingInactive() {
+  Esplora.writeBlue(100);
+  Esplora.writeGreen(0);    
+}
+
 
    
 
