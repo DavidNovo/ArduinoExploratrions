@@ -53,7 +53,9 @@ boolean lastStartBtnState = HIGH;
 
 
 void setup() {
-  
+  // initalization code esstablish connection to host computer
+  Keyboard.begin();
+  Serial.begin(9600);
 }
 
 
@@ -63,6 +65,8 @@ void loop() {
   
   if (isLoggingActive) {
     setLEDLoggingActive();
+    // gather data and print to host computer
+    logDataAndPrint();  
   } else {
     setLEDLoggingInactive();
   }  
@@ -103,6 +107,24 @@ void setLEDLoggingActive() {
 void setLEDLoggingInactive() {
   Esplora.writeBlue(100);
   Esplora.writeGreen(0);    
+}
+
+/*
+this method will gater desired data and print
+on host computer.  The formating of the
+data will happen in this methods
+*/
+void logDataAndPrint() {
+  //set LED to red to show data gathering and printing is occuring
+  Esplora.writeRed(200);
+  
+  //gather all desirec data
+  
+  //print data to host computer include tabs so data is readable
+  // in a spreadsheet application
+  
+  // turn off red LED
+  Esplora.writeRed(0);
 }
 
 
