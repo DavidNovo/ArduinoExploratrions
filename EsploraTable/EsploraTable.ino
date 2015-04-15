@@ -27,7 +27,7 @@ RBG led shows state of the board:
  full right the wait will be 10 seconds.
  
  Steps for development:
-   1. Switch 1 changes the color of the LED from blue to green.
+   1. DONE Switch 1 changes the color of the LED from blue to green.
    Note that the state of the swithc will have to be polled because
    the switch will not transmit information.
    
