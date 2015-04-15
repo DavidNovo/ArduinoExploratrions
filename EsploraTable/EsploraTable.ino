@@ -119,9 +119,16 @@ void logDataAndPrint() {
   Esplora.writeRed(200);
   
   //gather all desirec data
+  int xAxis = Esplora.readAccelerometer(X_AXIS);
+  int yAxis = Esplora.readAccelerometer(Y_AXIS);
+  int zAxis = Esplora.readAccelerometer(Z_AXIS);
   
   //print data to host computer include tabs so data is readable
   // in a spreadsheet application
+  Keyboard.print(xAxis);
+  Keyboard.print(yAxis);
+  Keyboard.print(zAxis);
+  Keyboard.print(KEY_HOME);
   
   // turn off red LED
   Esplora.writeRed(0);
