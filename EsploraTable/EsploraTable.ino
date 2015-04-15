@@ -31,10 +31,10 @@ RBG led shows state of the board:
    Note that the state of the swithc will have to be polled because
    the switch will not transmit information.
    
-   2. DONE Make connection to host computer and send data to computer.  
+   2. DONE   Make connection to host computer and send data to computer.  
    Make sure the rows fo data can added to a spreadsheet easily.
    
-   3. DONE When printing data, change LED from green to red.  When done
+   3. DONE   When printing data, change LED from green to red.  When done
    printing change LED from red to green.
    
    4. implement slider to change rate of data accquisition.
