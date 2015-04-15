@@ -63,13 +63,12 @@ void loop() {
   
   if (isLoggingActive) {
     Esplora.writeGreen(100);
-        Esplora.writeBlue(0);
+    Esplora.writeBlue(0);
   } else {
     Esplora.writeBlue(100);
     Esplora.writeGreen(0);
   }  
   
-  checkSwitchPress();
 }
 
 void checkSwitchPress() {
@@ -84,11 +83,15 @@ void checkSwitchPress() {
   if (startBtn != lastStartBtnState) {
   // then if the start button is high it has just been relased
     // change the state of logging   
-   isLoggingActive = !isLoggingActive; 
-  }
-  // else assign new state of button to the last polled state of the button 
-  lastStartBtnState = startBtn;
-  
+    // remember the button needs to be pressed, not held down
+    // this next check is important
+    if (startBtn == HIGH) {
+     isLoggingActive = !isLoggingActive;
+    } 
+ 
+    // else assign new state of button to the last polled state of the button 
+   lastStartBtnState = startBtn;
+  } 
   
 }
 
