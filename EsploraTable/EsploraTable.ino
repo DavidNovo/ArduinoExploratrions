@@ -84,10 +84,13 @@ void checkSwitchPress() {
   // then if the start button is high it has just been relased
     // change the state of logging   
     // remember the button needs to be pressed, not held down
-    // this next check is important
-    if (startBtn == HIGH) {
+    // this next check is important, pressing the button means the state becomes LOW
+    // for a short period of time.
+    // without this check the switch acts like a toggle
+    if (startBtn == HIGH) {  //the button is released
      isLoggingActive = !isLoggingActive;
     } 
+   
  
     // else assign new state of button to the last polled state of the button 
    lastStartBtnState = startBtn;
