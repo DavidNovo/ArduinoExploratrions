@@ -31,7 +31,7 @@ RBG led shows state of the board:
    Note that the state of the swithc will have to be polled because
    the switch will not transmit information.
    
-   2. Make connection to host computer and send data to computer.  
+   2. DONE Make connection to host computer and send data to computer.  
    Make sure the rows fo data can added to a spreadsheet easily.
    
    3. DONE When printing data, change LED from green to red.  When done
@@ -123,6 +123,17 @@ void logDataAndPrint() {
   int yAxis = Esplora.readAccelerometer(Y_AXIS);
   int zAxis = Esplora.readAccelerometer(Z_AXIS);
   
+  // ambient temperature
+  int celsius = Esplora.readTemperature(DEGREES_C);
+  int fahrenheit = Esplora.readTemperature(DEGREES_F);
+  
+  // ambient noise
+  int sound = Esplora.readMicrophone();
+
+  // ambient light level
+  int light = Esplora.readLightSensor();
+    
+    
   //print data to host computer include tabs so data is readable
   // in a spreadsheet application
   activeDelay(300);
@@ -133,11 +144,30 @@ void logDataAndPrint() {
   Keyboard.write(KEY_TAB);
   activeDelay(300);
   Keyboard.print(zAxis);
+  Keyboard.write(KEY_TAB);
+  activeDelay(300);
+  
+  Keyboard.print(celsius);
+  Keyboard.write(KEY_TAB);
+  activeDelay(300);
+  
+  Keyboard.print(fahrenheit);
+  Keyboard.write(KEY_TAB);
+  activeDelay(300);
+
+  Keyboard.print(sound);
+  Keyboard.write(KEY_TAB);
+  activeDelay(300);  
+  
+  Keyboard.print(light);
+  Keyboard.write(KEY_TAB);
+  activeDelay(300); 
+  
   Keyboard.println();
   activeDelay(300);
   Keyboard.print(KEY_HOME);
 
-  
+
   // turn off red LED
   Esplora.writeRed(0);
   setLEDLoggingActive();
