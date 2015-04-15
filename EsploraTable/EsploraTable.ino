@@ -45,6 +45,13 @@ RBG led shows state of the board:
 boolean isLoggingActive = false;
 
 /*
+Adding time as data written to the host computer.
+This holds the ms value when logging was activated.
+Outputted in the time column.
+*/
+unsigned long startedAt = 0;
+
+/*
 This variable holds tha last polled state of the start button.  
 If the code sees a change between this value and a new value,
 it means the button was pressed.
@@ -61,7 +68,7 @@ void setup() {
 
 
 void loop() {
-  activeDelay(300);
+  activeDelay(50);
   
   if (isLoggingActive) {
     setLEDLoggingActive();
@@ -91,6 +98,7 @@ void checkSwitchPress() {
     // without this check the switch acts like a toggle
     if (startBtn == HIGH) {  //the button is released
      isLoggingActive = !isLoggingActive;
+     startedAt = millis();
     } 
    
  
@@ -118,6 +126,10 @@ void logDataAndPrint() {
   //set LED to red to show data gathering and printing is occuring
   Esplora.writeRed(200);
   Esplora.writeGreen(0);
+  
+  // time reading was taken
+  unsigned long timeSecs = (millis() - startedAt) / 1000;
+  
   //gather all desirec data
   int xAxis = Esplora.readAccelerometer(X_AXIS);
   int yAxis = Esplora.readAccelerometer(Y_AXIS);
@@ -136,6 +148,10 @@ void logDataAndPrint() {
     
   //print data to host computer include tabs so data is readable
   // in a spreadsheet application
+  Keyboard.print(timeSecs);
+  Keyboard.write(KEY_TAB);
+  activeDelay(300);
+  
   activeDelay(300);
   Keyboard.print(xAxis);
   Keyboard.write(KEY_TAB);
