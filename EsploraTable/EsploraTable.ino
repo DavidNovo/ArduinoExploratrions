@@ -126,8 +126,11 @@ void logDataAndPrint() {
   //print data to host computer include tabs so data is readable
   // in a spreadsheet application
   Keyboard.print(xAxis);
+  Keyboard.write(KEY_TAB);
   Keyboard.print(yAxis);
+  Keyboard.write(KEY_TAB);
   Keyboard.print(zAxis);
+  Keyboard.println();
   Keyboard.print(KEY_HOME);
   
   // turn off red LED
