@@ -61,7 +61,7 @@ void setup() {
 
 
 void loop() {
-  checkSwitchPress();
+  activeDelay(300);
   
   if (isLoggingActive) {
     setLEDLoggingActive();
@@ -117,7 +117,7 @@ data will happen in this methods
 void logDataAndPrint() {
   //set LED to red to show data gathering and printing is occuring
   Esplora.writeRed(200);
-  
+  Esplora.writeGreen(0);
   //gather all desirec data
   int xAxis = Esplora.readAccelerometer(X_AXIS);
   int yAxis = Esplora.readAccelerometer(Y_AXIS);
@@ -125,18 +125,39 @@ void logDataAndPrint() {
   
   //print data to host computer include tabs so data is readable
   // in a spreadsheet application
+  activeDelay(300);
   Keyboard.print(xAxis);
   Keyboard.write(KEY_TAB);
+  activeDelay(300);
   Keyboard.print(yAxis);
   Keyboard.write(KEY_TAB);
+  activeDelay(300);
   Keyboard.print(zAxis);
   Keyboard.println();
+  activeDelay(300);
   Keyboard.print(KEY_HOME);
+
   
   // turn off red LED
   Esplora.writeRed(0);
+  setLEDLoggingActive();
 }
 
+/*
+There is a problems with speed.  The spreadsheet program does not keep up
+with the generation of data.  Also pressing the switch does not
+turn off logging in a timely fashion.
+
+This function will take care of both issues.  The number 
+passed in will determine the number of times the switch is polled
+for information.  Doing this will also create a needed delay.
+*/
+void activeDelay(unsigned long amount) {
+  unsigned long at = millis() + amount;
+  while (millis() < at) {
+    checkSwitchPress();
+  }
+}
 
    
 
