@@ -23,8 +23,7 @@ RBG led shows state of the board:
  next rows will have the detail data listed above.
  
  The rate of data accquisition will be derermined by the slider; if put to 
- the full left position, it will be 5 min between data accquisition, if put 
- full right the wait will be 10 seconds.
+ the full left position, it will long, if put full right the wait will be short.
  
  Steps for development:
    1. DONE Switch 1 changes the color of the LED from blue to green.
@@ -37,7 +36,7 @@ RBG led shows state of the board:
    3. DONE   When printing data, change LED from green to red.  When done
    printing change LED from red to green.
    
-   4. implement slider to change rate of data accquisition.
+   4. DONE implement slider to change rate of data accquisition.
    
    5. Add headers to the output stream.
  */
@@ -65,7 +64,13 @@ see when the next sample should be taken.
 */
 unsigned long nextSampleInThisManySeconds = 0;
 
-
+/*
+These variables are used when read the potentiometer.
+*/
+unsigned long lowValueOfPotentiometer = 0;
+unsigned long highValuesOfPotentiometer = 1023;
+unsigned long smallestSampleRateInterval = 10; // in seconds
+unsigned long largestSampleRateInterval = 290; // in seconds
 
 void setup() {
   // initalization code esstablish connection to host computer
@@ -85,9 +90,12 @@ void loop() {
     // the first time through this loop should always create a sample
     // then read the slider to determine the time for next sample
     int slider = Esplora.readSlider();
+    // this is for testing only
+    Serial.println(slider);
     
     // set the value from the slider to the variable use map function
-    int sampleInterval = map(slider, 0, 1023, 10, 290);
+    int sampleInterval = map(slider, lowValueOfPotentiometer, highValuesOfPotentiometer, 
+                              smallestSampleRateInterval, largestSampleRateInterval);
     nextSampleInThisManySeconds = millis() + sampleInterval * 1000;
     // gather data and print to host computer
     logDataAndPrint();
@@ -164,40 +172,67 @@ void logDataAndPrint() {
     
   //print data to host computer include tabs so data is readable
   // in a spreadsheet application
+  Keyboard.print("{");
+  Keyboard.print("time");
+  Keyboard.print(":"); 
   Keyboard.print(timeSecs);
   Keyboard.write(KEY_TAB);
   activeDelay(300);
   
   activeDelay(300);
+  Keyboard.print("x-axis");
+  Keyboard.print(":"); 
   Keyboard.print(xAxis);
   Keyboard.write(KEY_TAB);
+  
   activeDelay(300);
+  Keyboard.print("y-axis");
+  Keyboard.print(":"); 
   Keyboard.print(yAxis);
   Keyboard.write(KEY_TAB);
+  
   activeDelay(300);
+  Keyboard.print("z-axis");
+  Keyboard.print(":"); 
   Keyboard.print(zAxis);
   Keyboard.write(KEY_TAB);
-  activeDelay(300);
   
+  activeDelay(300);
+  Keyboard.print("celsius");
+  Keyboard.print(":"); 
   Keyboard.print(celsius);
   Keyboard.write(KEY_TAB);
-  activeDelay(300);
-  
+
+  activeDelay(300);  
+  Keyboard.print("fahrenheit");
+  Keyboard.print(":");  
   Keyboard.print(fahrenheit);
   Keyboard.write(KEY_TAB);
+  
   activeDelay(300);
-
+  Keyboard.print("sound_level");
+  Keyboard.print(":");
   Keyboard.print(sound);
   Keyboard.write(KEY_TAB);
-  activeDelay(300);  
   
-  Keyboard.print(light);
-  Keyboard.write(KEY_TAB);
-  activeDelay(300); 
-  
-  Keyboard.println();
   activeDelay(300);
-  Keyboard.print(KEY_HOME);
+  Keyboard.print("light_level");
+  Keyboard.print(":");  
+  Keyboard.print(light);
+  Keyboard.print("}");
+  Keyboard.write(KEY_TAB);
+  
+  activeDelay(300); 
+  Keyboard.println();
+  
+  activeDelay(300);
+
+  /*
+  This is an important correction. the print() function
+  was sending an ASCII code, of 210 for the KEY_HOME constant.
+  The write() function sends a key stroke.
+  */
+  //Keyboard.print(KEY_HOME);
 
 
   // turn off red LED
