@@ -58,6 +58,14 @@ it means the button was pressed.
 */
 boolean lastStartBtnState = HIGH;
 
+/*
+This variable is used to hold the time until the next sample is taken.
+This variable is checked against the startedAt variable to 
+see when the next sample should be taken.
+*/
+unsigned long nextSampleInThisManySeconds = 0;
+
+
 
 void setup() {
   // initalization code esstablish connection to host computer
@@ -72,8 +80,18 @@ void loop() {
   
   if (isLoggingActive) {
     setLEDLoggingActive();
+    if (nextSampleInThisManySeconds < millis() ) {
+    // check if it is time to sample
+    // the first time through this loop should always create a sample
+    // then read the slider to determine the time for next sample
+    int slider = Esplora.readSlider();
+    
+    // set the value from the slider to the variable use map function
+    int sampleInterval = map(slider, 0, 1023, 10, 290);
+    nextSampleInThisManySeconds = millis() + sampleInterval * 1000;
     // gather data and print to host computer
-    logDataAndPrint();  
+    logDataAndPrint();
+    }  
   } else {
     setLEDLoggingInactive();
   }  
@@ -95,13 +113,11 @@ void checkSwitchPress() {
     // remember the button needs to be pressed, not held down
     // this next check is important, pressing the button means the state becomes LOW
     // for a short period of time.
-    // without this check the switch acts like a toggle
+    // without this check the state does not stay changed
     if (startBtn == HIGH) {  //the button is released
      isLoggingActive = !isLoggingActive;
      startedAt = millis();
     } 
-   
- 
     // else assign new state of button to the last polled state of the button 
    lastStartBtnState = startBtn;
   } 
