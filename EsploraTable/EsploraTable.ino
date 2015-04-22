@@ -173,54 +173,86 @@ void logDataAndPrint() {
   //print data to host computer include tabs so data is readable
   // in a spreadsheet application
   Keyboard.print("{");
+  // with Keyboard.write() I have to use printable ASCII characters
+  Keyboard.write(34);  
   Keyboard.print("time");
+  Keyboard.write(34); 
   Keyboard.print(":"); 
+  Keyboard.write(34);   
   Keyboard.print(timeSecs);
-  Keyboard.write(KEY_TAB);
+  Keyboard.write(34);   
+  Keyboard.print(",");
   activeDelay(300);
   
   activeDelay(300);
+  Keyboard.write(34); 
   Keyboard.print("x-axis");
+  Keyboard.write(34); 
   Keyboard.print(":"); 
+  Keyboard.write(34); 
   Keyboard.print(xAxis);
-  Keyboard.write(KEY_TAB);
+  Keyboard.write(34); 
+  Keyboard.print(",");
   
   activeDelay(300);
+  Keyboard.write(34); 
   Keyboard.print("y-axis");
+  Keyboard.write(34); 
   Keyboard.print(":"); 
+  Keyboard.write(34); 
   Keyboard.print(yAxis);
-  Keyboard.write(KEY_TAB);
+  Keyboard.write(34); 
+  Keyboard.print(",");
   
   activeDelay(300);
+  Keyboard.write(34); 
   Keyboard.print("z-axis");
+  Keyboard.write(34); 
   Keyboard.print(":"); 
+  Keyboard.write(34); 
   Keyboard.print(zAxis);
-  Keyboard.write(KEY_TAB);
+  Keyboard.write(34); 
+  Keyboard.print(",");
   
   activeDelay(300);
+  Keyboard.write(34); 
   Keyboard.print("celsius");
+  Keyboard.write(34); 
   Keyboard.print(":"); 
+  Keyboard.write(34); 
   Keyboard.print(celsius);
-  Keyboard.write(KEY_TAB);
+  Keyboard.write(34); 
+  Keyboard.print(",");
 
   activeDelay(300);  
+  Keyboard.write(34); 
   Keyboard.print("fahrenheit");
+  Keyboard.write(34); 
   Keyboard.print(":");  
+  Keyboard.write(34); 
   Keyboard.print(fahrenheit);
-  Keyboard.write(KEY_TAB);
+  Keyboard.write(34); 
+  Keyboard.print(",");
   
   activeDelay(300);
+  Keyboard.write(34); 
   Keyboard.print("sound_level");
+  Keyboard.write(34); 
   Keyboard.print(":");
+  Keyboard.write(34); 
   Keyboard.print(sound);
-  Keyboard.write(KEY_TAB);
+  Keyboard.write(34); 
+  Keyboard.print(",");
   
   activeDelay(300);
+  Keyboard.write(34); 
   Keyboard.print("light_level");
+  Keyboard.write(34); 
   Keyboard.print(":");  
+  Keyboard.write(34); 
   Keyboard.print(light);
+  Keyboard.write(34); 
   Keyboard.print("}");
-  Keyboard.write(KEY_TAB);
   
   activeDelay(300); 
   Keyboard.println();
