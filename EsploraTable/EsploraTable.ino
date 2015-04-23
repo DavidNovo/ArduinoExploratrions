@@ -38,7 +38,7 @@ RBG led shows state of the board:
    
    4. DONE implement slider to change rate of data accquisition.
    
-   5. Add headers to the output stream.
+   column headers.  That way, it is not important to line-up columns.
  */
    
 boolean isLoggingActive = false;
@@ -57,7 +57,7 @@ it means the button was pressed.
 */
 boolean lastStartBtnState = HIGH;
 
-/*
+/*{"time":"24",
 This variable is used to hold the time until the next sample is taken.
 This variable is checked against the startedAt variable to 
 see when the next sample should be taken.
