@@ -38,6 +38,7 @@ RBG led shows state of the board:
    
    4. DONE implement slider to change rate of data accquisition.
    
+   5. DONE Add headers to the output stream. I decided to create a JSON object instead of 
    column headers.  That way, it is not important to line-up columns.
  */
    
